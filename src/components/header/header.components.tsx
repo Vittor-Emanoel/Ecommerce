@@ -1,9 +1,16 @@
 import { BsCart3 } from 'react-icons/bs'
+import { useNavigate } from 'react-router-dom'
 
 // Styles
 import { HeaderContainer, HeaderItem, HeaderItems, HeaderTitle } from './header.styles'
 
 const Header = () => {
+  const navigate = useNavigate()
+
+  const handleLoginClick = () => {
+    navigate('/login')
+  }
+
   return (
       <HeaderContainer>
           <HeaderTitle>
@@ -13,7 +20,7 @@ const Header = () => {
           <HeaderItem>
             Explorar
           </HeaderItem>
-          <HeaderItem>
+          <HeaderItem onClick={handleLoginClick}>
             Login
           </HeaderItem>
           <HeaderItem>
