@@ -32,7 +32,7 @@ export const CategoryName = styled.div`
   padding-right: 30px;
   padding-left: 30px;
   border-radius: 10px;
-  border: 1px solid #212529;
+  border: 1px solid ${Colors.primary};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   transition: all 0.5s ease;
 
