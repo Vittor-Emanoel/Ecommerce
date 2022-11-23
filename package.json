@@ -10,6 +10,7 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "axios": "^1.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
@@ -44,16 +45,17 @@
     ]
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "eslint": "^8.0.1",
-    "eslint-config-standard-with-typescript": "^23.0.0",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-n": "^15.0.0",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-react": "^7.31.11",
-    "git-commit-msg-linter": "^4.2.1",
-    "husky": "^8.0.2",
-    "lint-staged": "^13.0.3",
-    "prettier-config-standard": "^5.0.0"
+      "@typescript-eslint/eslint-plugin": "^5.15.0",
+      "@typescript-eslint/parser": "^5.15.0",
+      "eslint": "^7.32.0",
+      "eslint-config-standard": "^16.0.3",
+      "eslint-plugin-import": "^2.25.4",
+      "eslint-plugin-node": "^11.1.0",
+      "eslint-plugin-promise": "^5.2.0",
+      "eslint-plugin-react": "^7.29.4",
+      "git-commit-msg-linter": "^4.1.1",
+      "husky": "^7.0.4",
+      "lint-staged": "^12.3.7",
+      "prettier-config-standard": "^5.0.0"
+    }
   }
-}
