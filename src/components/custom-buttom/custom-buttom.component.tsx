@@ -1,13 +1,17 @@
-import { FunctionComponent } from 'react'
-import { CustomButtonContainer } from './custom-buttom.styles'
+/* QUANDO VOCÊ QUISER HERDAR PROPS DE UM ELEMENTO HTML USE O NOMEDOELEMENTOHTMLATTIBUTES */
 
-interface CustomButtonProps {
-  children: string;
+import React, { FunctionComponent, ButtonHTMLAttributes } from 'react'
+import { CustomButtonContainer, IconContainer } from './custom-buttom.styles'
+
+interface CustomButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
+  children: string,
+  startIcon?: React.ReactNode;/* passando um component como props */
 }
 
-const CustomButton:FunctionComponent<CustomButtonProps> = ({ children }) => {
+const CustomButton:FunctionComponent<CustomButtonProps> = ({ children, startIcon, ...rest }) => {
   return (
-      <CustomButtonContainer>
+      <CustomButtonContainer {...rest}>
+        {startIcon && <IconContainer>{startIcon}</IconContainer> }
           {children}
       </CustomButtonContainer>
   )
