@@ -7,7 +7,7 @@ import validator from 'validator'
 import CustomButton from '../../components/custom-button/custom-button.component'
 import CustomInput from '../../components/custom-input/custom-input.component'
 import Header from '../../components/header/header.components'
-import InputErrorMessage from '../../components/Input-error-message/input-error-message.component'
+import InputErrorMessage from '../../components/input-error-message/input-error-message.component'
 
 // Styles
 import {
@@ -69,6 +69,7 @@ const LoginPage = () => {
     <p>Senha</p>
 
     <CustomInput
+    type='password'
     hasError={!!errors?.password}
     placeholder='Digite sua senha' {...register('password', {
       required: true
