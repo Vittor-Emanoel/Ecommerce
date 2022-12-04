@@ -1,7 +1,9 @@
+import { AuthError, AuthErrorCodes, signInWithEmailAndPassword } from 'firebase/auth'
+import { useForm } from 'react-hook-form'
 import { BsGoogle } from 'react-icons/bs'
 import { FiLogIn } from 'react-icons/fi'
-import { useForm } from 'react-hook-form'
 import validator from 'validator'
+import { auth } from '../../config/firebase.config'
 
 // Components
 import CustomButton from '../../components/custom-button/custom-button.component'
@@ -18,18 +20,40 @@ import {
   LoginSubtitle
 } from './login.styles'
 
+interface LoginForm {
+  email: string,
+  password: string
+}
+
 const LoginPage = () => {
   const {
     register,
+    setError,
     formState: { errors },
     handleSubmit
-  } = useForm()
+  } = useForm<LoginForm>()
 
-  const handleSubmitPress = (data: any) => {
-    console.log({ data })
+  const handleSubmitPress = async (data: LoginForm) => {
+    try {
+      const userCredentials = await signInWithEmailAndPassword(auth,
+        data.email,
+        data.password)
+      console.log(userCredentials)
+    } catch (error) {
+      const _error = error as AuthError
+
+      if (_error.code === AuthErrorCodes.INVALID_PASSWORD) {
+        return setError('password', {
+          type: 'mismatch'
+        })
+      }
+      if (_error.code === AuthErrorCodes.USER_DELETED) {
+        return setError('email', {
+          type: 'notFound'
+        })
+      }
+    }
   }
-
-  console.log(errors)
 
   return (
    <>
@@ -64,6 +88,10 @@ const LoginPage = () => {
         <InputErrorMessage>Por favor, insira um e-mail válido</InputErrorMessage>
       )}
 
+      {errors?.email?.type === 'notFound' && (
+        <InputErrorMessage>O e-mail não foi encontrado.</InputErrorMessage>
+      )}
+
     </LoginInputContainer>
     <LoginInputContainer>
     <p>Senha</p>
@@ -78,6 +106,9 @@ const LoginPage = () => {
     {errors?.password?.type === 'required' && (
       <InputErrorMessage>a senha é obrigatória</InputErrorMessage>
     )}
+     {errors?.password?.type === 'mismatch' && (
+      <InputErrorMessage>Senha errada, tente novamente!</InputErrorMessage>
+     )}
 
     </LoginInputContainer>
         <CustomButton startIcon={<FiLogIn size={18}/> } onClick={() => handleSubmit(handleSubmitPress)()}>
