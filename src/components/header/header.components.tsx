@@ -47,7 +47,7 @@ const Header = () => {
           {isAuthentication && (
 
           <HeaderItem onClick={() => signOut(auth)}>
-              Sair
+                Sair
           </HeaderItem>
 
           )}
