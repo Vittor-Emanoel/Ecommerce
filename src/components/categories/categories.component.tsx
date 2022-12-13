@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react'
-import { getDocs, collection } from 'firebase/firestore'
+import { collection, getDocs } from 'firebase/firestore'
+import { useEffect, useState } from 'react'
 
 // Components
 import CategoryItem from '../category-item/category-item.component'
 
 // Ultilities
-import Category from '../../types/category.types'
 import { db } from '../../config/firebase.config'
 import { categoryConverter } from '../../converters/firestore.converter'
+import Category from '../../types/category.types'
 
 // Styles
 import { CategoriesContainer, CategoriesContent } from './categories.styles'
@@ -31,7 +31,6 @@ const Categories = () => {
     }
   }
 
-  console.log({ categories })
   useEffect(() => {
     fetchCategories()
   }, [])
