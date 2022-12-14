@@ -9,6 +9,7 @@ import LoginPage from './pages/login/login.page'
 import SignUpPage from './pages/sign-up/sign-up.page'
 
 // Ultilities
+import Loading from './components/loading/loading.component'
 import { auth, db } from './config/firebase.config'
 import { UserContext } from './contexts/user.context'
 import { userConverter } from './converters/firestore.converter'
@@ -50,7 +51,7 @@ const App: FunctionComponent = () => {
   })
 
   // aplicação só vai ser exibida quando terminar o processamento
-  if (isInitialized) return null
+  if (isInitialized) return <Loading />
   return (
     <BrowserRouter>
       <Routes>
