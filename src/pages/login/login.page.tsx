@@ -1,6 +1,6 @@
 import { AuthError, AuthErrorCodes, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
 import { addDoc, collection, getDocs, query, where } from 'firebase/firestore'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { BsGoogle } from 'react-icons/bs'
 import { FiLogIn } from 'react-icons/fi'
@@ -11,6 +11,7 @@ import CustomButton from '../../components/custom-button/custom-button.component
 import CustomInput from '../../components/custom-input/custom-input.component'
 import Header from '../../components/header/header.components'
 import InputErrorMessage from '../../components/input-error-message/input-error-message.component'
+import Loading from '../../components/loading/loading.component'
 
 // Ultilities
 import validator from 'validator'
@@ -39,6 +40,7 @@ const LoginPage = () => {
     handleSubmit
   } = useForm<LoginForm>()
 
+  const [isLoading, setIsLoading] = useState(false)
   // se não tiver autenticado, será redirecionado para a página inicial
   const { isAuthenticated } = useContext(UserContext)
 
@@ -52,6 +54,7 @@ const LoginPage = () => {
 
   const handleSubmitPress = async (data: LoginForm) => {
     try {
+      setIsLoading(true)
       const userCredentials = await signInWithEmailAndPassword(auth,
         data.email,
         data.password)
@@ -69,11 +72,14 @@ const LoginPage = () => {
           type: 'notFound'
         })
       }
+    } finally {
+      setIsLoading(false)
     }
   }
 
   const handleSignWithGooglePress = async () => {
     try {
+      setIsLoading(true)
       const userCredentials = await signInWithPopup(auth, googleProvider)
 
       const querySnapshot = await getDocs(query(collection(db, 'user'), where('id', '==', userCredentials.user.uid)))
@@ -94,12 +100,15 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.log(error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
   return (
    <>
    <Header />
+   {isLoading && <Loading />}
 
    <LoginContainer>
     <LoginContent >
