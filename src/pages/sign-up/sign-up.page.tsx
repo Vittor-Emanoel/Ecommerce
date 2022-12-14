@@ -1,6 +1,6 @@
 import { AuthError, AuthErrorCodes, createUserWithEmailAndPassword } from 'firebase/auth'
 import { addDoc, collection } from 'firebase/firestore'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { FiLogIn } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
@@ -11,6 +11,7 @@ import CustomButton from '../../components/custom-button/custom-button.component
 import CustomInput from '../../components/custom-input/custom-input.component'
 import Header from '../../components/header/header.components'
 import InputErrorMessage from '../../components/input-error-message/input-error-message.component'
+import Loading from '../../components/loading/loading.component'
 
 // Styles
 import { UserContext } from '../../contexts/user.context'
@@ -38,6 +39,8 @@ const SignUpPage = () => {
     formState: { errors }
   } = useForm<SignUpForm>()
 
+  const [isLoading, setIsLoading] = useState(false)
+
   // assistindo a um valor
   const watchPassword = watch('password')
 
@@ -51,6 +54,7 @@ const SignUpPage = () => {
   }, [isAuthenticated])
   const handleSubmitPress = async (data: SignUpForm) => {
     try {
+      setIsLoading(true)
       const userCredentials = await createUserWithEmailAndPassword(auth, data.email, data.password)
 
       await addDoc(collection(db, 'users'), {
@@ -69,6 +73,8 @@ const SignUpPage = () => {
           type: 'alreadyInUse'
         })
       }
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -76,6 +82,7 @@ const SignUpPage = () => {
     <div>
       <Header />
 
+    {isLoading && <Loading />}
       <SignUpContainer>
         <SignUpContent>
           <SignUpHeadline>Crie sua conta</SignUpHeadline>
