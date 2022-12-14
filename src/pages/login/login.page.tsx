@@ -39,15 +39,16 @@ const LoginPage = () => {
     handleSubmit
   } = useForm<LoginForm>()
 
-  const { isAuthentication } = useContext(UserContext)
+  // se não tiver autenticado, será redirecionado para a página inicial
+  const { isAuthenticated } = useContext(UserContext)
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (isAuthentication) {
+    if (isAuthenticated) {
       navigate('/')
     }
-  }, [isAuthentication])
+  }, [isAuthenticated])
 
   const handleSubmitPress = async (data: LoginForm) => {
     try {

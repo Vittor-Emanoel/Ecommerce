@@ -41,14 +41,14 @@ const SignUpPage = () => {
   // assistindo a um valor
   const watchPassword = watch('password')
 
-  const { isAuthentication } = useContext(UserContext)
+  const { isAuthenticated } = useContext(UserContext)
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (isAuthentication) {
+    if (isAuthenticated) {
       navigate('/')
     }
-  }, [isAuthentication])
+  }, [isAuthenticated])
   const handleSubmitPress = async (data: SignUpForm) => {
     try {
       const userCredentials = await createUserWithEmailAndPassword(auth, data.email, data.password)

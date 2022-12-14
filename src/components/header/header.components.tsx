@@ -13,7 +13,7 @@ import { HeaderContainer, HeaderItem, HeaderItems, HeaderTitle } from './header.
 const Header = () => {
   const navigate = useNavigate()
 
-  const { isAuthentication } = useContext(UserContext)
+  const { isAuthenticated } = useContext(UserContext)
 
   const handleLoginClick = () => {
     navigate('/login')
@@ -33,7 +33,7 @@ const Header = () => {
             Explorar
             </HeaderItem>
 
-          {!isAuthentication && (
+          {!isAuthenticated && (
             <>
              <HeaderItem onClick={handleLoginClick}>
              Login
@@ -44,7 +44,7 @@ const Header = () => {
            </>
           )}
 
-          {isAuthentication && (
+          { isAuthenticated && (
 
           <HeaderItem onClick={() => signOut(auth)}>
                 Sair
