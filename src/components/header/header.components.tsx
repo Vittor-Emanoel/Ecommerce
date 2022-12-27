@@ -27,13 +27,17 @@ const Header = () => {
     navigate('/')
   }
 
+  const handleExploreClick = () => {
+    navigate('/explore')
+  }
+
   return (
       <HeaderContainer>
           <HeaderTitle onClick={handleLogoClick}>
             CLUB CLOTHING
           </HeaderTitle>
           <HeaderItems>
-            <HeaderItem>
+            <HeaderItem onClick={handleExploreClick}>
             Explorar
             </HeaderItem>
 
