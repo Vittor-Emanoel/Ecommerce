@@ -22,7 +22,7 @@ export const categoryConverter = {
       displayName: data.displayName,
       imageUrl: data.imageUrl,
       name: data.name,
-      produtcs: data.produtcs
+      products: data.products
     }
   }
 }
