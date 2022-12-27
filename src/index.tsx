@@ -4,6 +4,7 @@ import App from './App'
 import './index.css'
 import reportWebVitals from './reportWebVitals'
 
+import CartContextProvider from './contexts/cart.context'
 import CategoryContextProvider from './contexts/category.context'
 import UserContextProvider from './contexts/user.context'
 
@@ -11,7 +12,9 @@ ReactDOM.render(
   <React.StrictMode>
     <UserContextProvider>
       <CategoryContextProvider>
-      <App />
+        <CartContextProvider>
+           <App />
+      </CartContextProvider>
       </CategoryContextProvider>
     </UserContextProvider>
   </React.StrictMode>,
