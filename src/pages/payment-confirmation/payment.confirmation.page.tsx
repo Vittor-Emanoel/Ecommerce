@@ -1,6 +1,6 @@
 import { FunctionComponent, useContext, useEffect } from 'react'
 import { AiOutlineCheckCircle, AiOutlineCloseCircle, AiOutlineHome } from 'react-icons/ai'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { BsFillEmojiFrownFill } from 'react-icons/bs'
 
@@ -15,11 +15,16 @@ import { PaymentConfirmationContainer, PaymentConfirmationContent } from './paym
 
 const PaymentConfimationPage: FunctionComponent = () => {
   const { clearProducts } = useContext(CartContext)
+  const navigate = useNavigate()
 
   const [searchParams] = useSearchParams()
 
   const status = searchParams.get('success')
   const statusCanceled = searchParams.get('canceled')
+
+  const handleToHomeBack = () => {
+    navigate('/')
+  }
 
   useEffect(() => {
     if (status === 'true') {
@@ -55,7 +60,7 @@ const PaymentConfimationPage: FunctionComponent = () => {
         </>
       )}
 
-      <CustomButton startIcon={<AiOutlineHome />}>Ir para a página inicial</CustomButton>
+      <CustomButton startIcon={<AiOutlineHome />} onClick={handleToHomeBack}>Ir para a página inicial</CustomButton>
     </PaymentConfirmationContent>
     </PaymentConfirmationContainer>
 
