@@ -59,7 +59,7 @@ const CartContextProvider: FunctionComponent = ({ children }) => {
   }, [products])
 
   const toggleCart = () => {
-    // se carrinho estiver visivel, esconde ele, se não estiver visivel deixa ele visivel
+    // se carrinho estiver visivel, esconde ele, se não estiver visivel deixa ele visivel!!
     setIsVisible((prevState) => !prevState)
   }
 

@@ -1,19 +1,25 @@
 import { FunctionComponent, useContext } from 'react'
-import CustomButton from '../custom-button/custom-button.component'
-
 import { BsCardChecklist } from 'react-icons/bs'
 
-// Styles
-import { CartContext } from '../../contexts/cart.context'
+// Components
 import CartItem from '../cart-item/cart-item.component'
+import CustomButton from '../custom-button/custom-button.component'
+
+// Styles
+import { useNavigate } from 'react-router-dom'
+import { CartContext } from '../../contexts/cart.context'
 import { CartContainer, CartContent, CartEscapeArea, CartTitle, CartTotal } from './cart.styles'
 
-interface Props {
-
-}
-
-const CartComponent : FunctionComponent<Props> = () => {
+const CartComponent : FunctionComponent = () => {
   const { isVisible, products, productsTotalPrice, toggleCart, productsCount } = useContext(CartContext)
+
+  const navigate = useNavigate()
+
+  const handleGoToCheckoutClick = () => {
+    navigate('/checkout')
+    toggleCart()
+  }
+
   return (
     <CartContainer isVisible={isVisible}>
       <CartEscapeArea onClick={toggleCart}/>
@@ -25,7 +31,7 @@ const CartComponent : FunctionComponent<Props> = () => {
         {products.map(product => <CartItem key={product.id} product={product}/>)}
       {productsCount > 0 && <CartTotal>Total: {productsTotalPrice}</CartTotal> }
 
-      {productsCount > 0 && <CustomButton startIcon={<BsCardChecklist />}>Ir para o Checkout</CustomButton>}
+      {productsCount > 0 && <CustomButton startIcon={<BsCardChecklist />} onClick={handleGoToCheckoutClick}>Ir para o Checkout</CustomButton>}
 
         {productsCount === 0 && (
           <p>Seu carrinho está vazio!</p>
