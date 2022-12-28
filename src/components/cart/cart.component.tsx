@@ -13,7 +13,7 @@ interface Props {
 }
 
 const CartComponent : FunctionComponent<Props> = () => {
-  const { isVisible, products, toggleCart } = useContext(CartContext)
+  const { isVisible, products, productsTotalPrice, toggleCart } = useContext(CartContext)
   return (
     <CartContainer isVisible={isVisible}>
       <CartEscapeArea onClick={toggleCart}/>
@@ -23,7 +23,7 @@ const CartComponent : FunctionComponent<Props> = () => {
       </CartTitle>
 
         {products.map(product => <CartItem key={product.id} product={product}/>)}
-      <CartTotal>Total: 999</CartTotal>
+      <CartTotal>Total: {productsTotalPrice}</CartTotal>
       <CustomButton startIcon={<BsCardChecklist />}>Ir para o Checkout</CustomButton>
       </CartContent>
 
