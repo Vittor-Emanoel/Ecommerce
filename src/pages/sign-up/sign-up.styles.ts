@@ -11,9 +11,9 @@ export const SignUpContainer = styled.div`
 export const SignUpHeadline = styled.p`
   font-weight: 600;
   font-size: 1.3rem;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   color: ${Colors.text.dark};
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   border-bottom: 1px solid #6c757d;
   width: 100%;
   text-align: center;
@@ -24,6 +24,10 @@ export const SignUpContent = styled.div`
   flex-direction: column;
   align-items: center;
   width: 450px;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `
 
 export const SignUpInputContainer = styled.div`
