@@ -23,13 +23,13 @@ const CartComponent : FunctionComponent<Props> = () => {
       </CartTitle>
 
         {products.map(product => <CartItem key={product.id} product={product}/>)}
-     {productsCount > 0 && <CartTotal>Total: {productsTotalPrice}</CartTotal> }
+      {productsCount > 0 && <CartTotal>Total: {productsTotalPrice}</CartTotal> }
 
-     {productsCount > 0 && <CustomButton startIcon={<BsCardChecklist />}>Ir para o Checkout</CustomButton>}
+      {productsCount > 0 && <CustomButton startIcon={<BsCardChecklist />}>Ir para o Checkout</CustomButton>}
 
-    {productsCount === 0 && (
-      <p>Seu carrinho está vazio!</p>
-    )}
+        {productsCount === 0 && (
+          <p>Seu carrinho está vazio!</p>
+        )}
       </CartContent>
 
     </CartContainer>

@@ -1,4 +1,4 @@
-import { createContext, FunctionComponent, useMemo, useState } from 'react'
+import { createContext, FunctionComponent, useEffect, useMemo, useState } from 'react'
 import CartProduct from '../types/cart.types'
 import Product from '../types/product.types'
 
@@ -29,6 +29,18 @@ export const CartContext = createContext<ICartContext>({
 const CartContextProvider: FunctionComponent = ({ children }) => {
   const [isVisible, setIsVisible] = useState(false)
   const [products, setProducts] = useState<CartProduct[]>([])
+
+  // exibindo a quantidade de produtos sempre que o página for recarregada
+
+  useEffect(() => {
+    const productsFromLocalStorage = JSON.parse(localStorage.getItem('cartProducts')!)
+    setProducts(productsFromLocalStorage)
+  }, [])
+
+  // persistindo os produtos no carrinho
+  useEffect(() => {
+    localStorage.setItem('cartProducts', JSON.stringify(products))
+  }, [products])
 
   // Soma total dos valores // reduzindo tudo ao um valor
 
