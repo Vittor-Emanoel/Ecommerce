@@ -9,6 +9,7 @@ import CheckoutPage from './pages/checkout/checkout.page'
 import ExplorePage from './pages/explore/explore.page'
 import HomePage from './pages/home/home.page'
 import LoginPage from './pages/login/login.page'
+import PaymentConfimationPage from './pages/payment-confirmation/payment.confirmation.page'
 import SignUpPage from './pages/sign-up/sign-up.page'
 
 // Components
@@ -74,6 +75,7 @@ const App: FunctionComponent = () => {
           </AuthenticationGuard>
           }
           />
+          <Route path='/payment-confirmation' element={<PaymentConfimationPage />}/>
         <Route path='/login' element={<LoginPage />}/>
         <Route path='/sign-up' element={<SignUpPage />}/>
       </Routes>
