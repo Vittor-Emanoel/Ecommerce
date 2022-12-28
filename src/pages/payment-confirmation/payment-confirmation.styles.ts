@@ -2,10 +2,13 @@ import styled from 'styled-components'
 
 export const PaymentConfirmationContainer = styled.div`
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  
 `
 
 export const PaymentConfirmationContent = styled.div`
@@ -18,4 +21,17 @@ export const PaymentConfirmationContent = styled.div`
     font-size: 1.125rem;
     font-weight: 500;
   }
+
+  @media (max-width: 768px) { 
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+      button {
+        width: 50%;
+      }
+
+}
+  
+
 `
