@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import CustomButton from '../../components/custom-button/custom-button.component'
 import CustomInput from '../../components/custom-input/custom-input.component'
 import Header from '../../components/header/header.components'
-import InputErrorMessage from '../../components/input-error-message/input-error-message.component'
+
 import Loading from '../../components/loading/loading.component'
 
 // Ultilities
@@ -18,6 +18,7 @@ import validator from 'validator'
 import { auth, db, googleProvider } from '../../config/firebase.config'
 
 // Styles
+import InputErrorMessage from '../../components/input-error-message/input-error-message.component'
 import { UserContext } from '../../contexts/user.context'
 import {
   LoginContainer,
