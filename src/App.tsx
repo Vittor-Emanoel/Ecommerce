@@ -11,6 +11,7 @@ import LoginPage from './pages/login/login.page'
 import SignUpPage from './pages/sign-up/sign-up.page'
 
 // Components
+import CartComponent from './components/cart/cart.component'
 import Loading from './components/loading/loading.component'
 
 // Ultilities
@@ -65,6 +66,8 @@ const App: FunctionComponent = () => {
         <Route path='/login' element={<LoginPage />}/>
         <Route path='/sign-up' element={<SignUpPage />}/>
       </Routes>
+
+      <CartComponent />
     </BrowserRouter>
   )
 }

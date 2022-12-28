@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 // ultilitis
 import { auth } from '../../config/firebase.config'
+import { CartContext } from '../../contexts/cart.context'
 import { UserContext } from '../../contexts/user.context'
 
 // Styles
@@ -14,6 +15,7 @@ const Header = () => {
   const navigate = useNavigate()
 
   const { isAuthenticated } = useContext(UserContext)
+  const { toggleCart } = useContext(CartContext)
 
   const handleLoginClick = () => {
     navigate('/login')
@@ -61,7 +63,7 @@ const Header = () => {
           )}
 
           <HeaderItem >
-            <BsCart3 size={25}/>
+            <BsCart3 size={25} onClick={toggleCart}/>
             <p style={{ marginLeft: 5 }}>5</p>
           </HeaderItem>
           </HeaderItems>
