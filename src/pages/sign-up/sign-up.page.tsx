@@ -10,7 +10,7 @@ import { auth, db } from '../../config/firebase.config'
 import CustomButton from '../../components/custom-button/custom-button.component'
 import CustomInput from '../../components/custom-input/custom-input.component'
 import Header from '../../components/header/header.components'
-import InputErrorMessage from '../../components/input-error-message/input-error-message.component'
+import ErrorMessage from '../../components/input-error/error-message.component'
 import Loading from '../../components/loading/loading.component'
 
 // Styles
@@ -96,7 +96,7 @@ const SignUpPage = () => {
             />
 
             {errors?.firstName?.type === 'required' && (
-              <InputErrorMessage>O nome é obrigatório.</InputErrorMessage>
+              <ErrorMessage>O nome é obrigatório.</ErrorMessage>
             )}
           </SignUpInputContainer>
 
@@ -109,7 +109,7 @@ const SignUpPage = () => {
             />
 
             {errors?.lastName?.type === 'required' && (
-              <InputErrorMessage>O sobrenome é obrigatório.</InputErrorMessage>
+              <ErrorMessage>O sobrenome é obrigatório.</ErrorMessage>
             )}
           </SignUpInputContainer>
 
@@ -127,16 +127,16 @@ const SignUpPage = () => {
             />
 
             {errors?.email?.type === 'required' && (
-              <InputErrorMessage>O e-mail é obrigatório.</InputErrorMessage>
+              <ErrorMessage>O e-mail é obrigatório.</ErrorMessage>
             )}
 
             {errors?.email?.type === 'validate' && (
-              <InputErrorMessage>
+              <ErrorMessage>
                 Por favor, insira um e-mail válido.
-              </InputErrorMessage>
+              </ErrorMessage>
             )}
               {errors?.email?.type === 'alreadyInUse' && (
-              <InputErrorMessage>Está e-mail já está sendo ultilizado</InputErrorMessage>
+              <ErrorMessage>Está e-mail já está sendo ultilizado</ErrorMessage>
               )}
 
           </SignUpInputContainer>
@@ -151,11 +151,11 @@ const SignUpPage = () => {
             />
 
             {errors?.password?.type === 'required' && (
-              <InputErrorMessage>A senha é obrigatória.</InputErrorMessage>
+              <ErrorMessage>A senha é obrigatória.</ErrorMessage>
             )}
 
              {errors?.password?.type === 'minLength' && (
-              <InputErrorMessage>A senha precisa ter no minimo 6 caracteres</InputErrorMessage>
+              <ErrorMessage>A senha precisa ter no minimo 6 caracteres</ErrorMessage>
              )}
 
           </SignUpInputContainer>
@@ -177,18 +177,18 @@ const SignUpPage = () => {
             />
 
             {errors?.passwordConfirmation?.type === 'required' && (
-              <InputErrorMessage>
+              <ErrorMessage>
                 A confirmação de senha é obrigatória.
-              </InputErrorMessage>
+              </ErrorMessage>
             )}
 
             {errors?.passwordConfirmation?.type === 'validate' && (
-              <InputErrorMessage>
+              <ErrorMessage>
                 A confirmação de senha precisa ser igual a senha.
-              </InputErrorMessage>
+              </ErrorMessage>
             )}
               {errors?.password?.type === 'minLength' && (
-              <InputErrorMessage>A senha precisa ter no minimo 6 caracteres</InputErrorMessage>
+              <ErrorMessage>A senha precisa ter no minimo 6 caracteres</ErrorMessage>
               )}
 
           </SignUpInputContainer>

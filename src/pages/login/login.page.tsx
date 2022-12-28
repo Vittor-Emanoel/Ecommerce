@@ -18,7 +18,8 @@ import validator from 'validator'
 import { auth, db, googleProvider } from '../../config/firebase.config'
 
 // Styles
-import InputErrorMessage from '../../components/input-error-message/input-error-message.component'
+
+import ErrorMessage from '../../components/input-error/error-message.component'
 import { UserContext } from '../../contexts/user.context'
 import {
   LoginContainer,
@@ -134,15 +135,15 @@ const LoginPage = () => {
 
       })}/>
       {errors?.email?.type === 'required' && (
-      <InputErrorMessage>o e-mail é obrigatório</InputErrorMessage>
+      <ErrorMessage>o e-mail é obrigatório</ErrorMessage>
       )}
 
       {errors?.email?.type === 'validate' && (
-        <InputErrorMessage>Por favor, insira um e-mail válido</InputErrorMessage>
+        <ErrorMessage>Por favor, insira um e-mail válido</ErrorMessage>
       )}
 
       {errors?.email?.type === 'notFound' && (
-        <InputErrorMessage>O e-mail não foi encontrado.</InputErrorMessage>
+        <ErrorMessage>O e-mail não foi encontrado.</ErrorMessage>
       )}
 
     </LoginInputContainer>
@@ -157,10 +158,10 @@ const LoginPage = () => {
     })}/>
 
     {errors?.password?.type === 'required' && (
-      <InputErrorMessage>a senha é obrigatória</InputErrorMessage>
+      <ErrorMessage>a senha é obrigatória</ErrorMessage>
     )}
      {errors?.password?.type === 'mismatch' && (
-      <InputErrorMessage>Senha errada, tente novamente!</InputErrorMessage>
+      <ErrorMessage>Senha errada, tente novamente!</ErrorMessage>
      )}
 
     </LoginInputContainer>
