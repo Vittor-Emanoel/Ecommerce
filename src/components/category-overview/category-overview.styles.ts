@@ -5,6 +5,10 @@ export const CategoryContainer = styled.div`
   flex-direction: column;
   width: 100%;
   margin-top: 20px;
+  @media (max-width: 768px) {
+    padding-left: 1rem;
+  }
+
 `
 
 export const CategoryTitle = styled.p`
@@ -17,5 +21,10 @@ export const ProductsContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
+  margin: 0 auto;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    grid-row-gap: 20px;
+  }
 `
