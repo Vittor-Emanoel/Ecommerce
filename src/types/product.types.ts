@@ -2,7 +2,7 @@ interface Product {
   id: string
   imageUrl: string
   name: string
-  prince: number
+  price: number
 }
 
 export default Product
