@@ -2,16 +2,15 @@ import styled from 'styled-components'
 import Colors from '../../theme/theme.color'
 
 interface CategoryItemContainerProps {
-  backgroundImage: string;
+  backgroundImage: string
 }
 
 export const CategoryItemContainer = styled.div<CategoryItemContainerProps>`
-   display: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
-  background-color: red;
   grid-gap: 15px;
   background-size: cover;
   background-repeat: no-repeat;
@@ -20,11 +19,16 @@ export const CategoryItemContainer = styled.div<CategoryItemContainerProps>`
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
   background-color: rgba(0, 0, 0, 0.3);
   background-blend-mode: color;
-  background-image: ${(props) => `url('${props.backgroundImage} ')`};
+  background-image: ${(props) => `url('${props.backgroundImage}')`};
+
+  @media (max-width: 768px) {
+    padding: 0 50px 0 50px;
+    height: 300px;
+  }
 `
 
 export const CategoryName = styled.div`
-   color: ${Colors.text.white};
+  color: ${Colors.text.white};
   text-align: center;
   background: rgba(233, 236, 239, 0.45);
   padding-top: 10px;
@@ -41,9 +45,7 @@ export const CategoryName = styled.div`
     background: rgba(233, 236, 239, 0.55);
   }
 
-  p {
-    &:nth-child(1) {
-      font-weight: 600;
-    }
+  & p:nth-child(1) {
+    font-weight: 600;
   }
 `

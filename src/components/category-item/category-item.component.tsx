@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import Category from '../../types/category.types'
 
 // Styles
-import { CategoryItemContainer, CategoryName } from './categoty.styles'
+import { CategoryItemContainer, CategoryName } from './category.styles'
 
 interface CategoryItemProps {
   category: Category
