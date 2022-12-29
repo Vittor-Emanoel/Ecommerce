@@ -1,5 +1,4 @@
 import { FunctionComponent, useContext } from 'react'
-import { useAlert } from 'react-alert'
 
 // Ultilities
 import { BsCartPlus } from 'react-icons/bs'
@@ -22,15 +21,9 @@ interface ProductItemProps {
 
 const ProductItem: FunctionComponent<ProductItemProps> = ({ product }) => {
   const { addProductToCart } = useContext(CartContext)
-  const alert = useAlert()
 
-  const handleAddToCartClick = async () => {
-    try {
-      await addProductToCart(product)
-      await alert.info('Produto adicionado ao carrinho')
-    } catch (error) {
-
-    }
+  const handleAddToCartClick = () => {
+    addProductToCart(product)
   }
 
   return (
