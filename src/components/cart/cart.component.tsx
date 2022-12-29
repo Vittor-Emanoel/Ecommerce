@@ -6,6 +6,7 @@ import CartItem from '../cart-item/cart-item.component'
 import CustomButton from '../custom-button/custom-button.component'
 
 // Styles
+import { BiChevronLeft } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 import { CartContext } from '../../contexts/cart.context'
 import { CartContainer, CartContent, CartEscapeArea, CartTitle, CartTotal } from './cart.styles'
@@ -20,11 +21,16 @@ const CartComponent : FunctionComponent = () => {
     toggleCart()
   }
 
+  const handleGetOutOfCart = () => {
+    toggleCart()
+  }
+
   return (
     <CartContainer isVisible={isVisible}>
       <CartEscapeArea onClick={toggleCart}/>
       <CartContent>
       <CartTitle>
+      <BiChevronLeft size={30} onClick={handleGetOutOfCart}/>
         Seu Carrinho
       </CartTitle>
 

@@ -1,12 +1,12 @@
 import React from 'react'
+
 import ReactDOM from 'react-dom'
 import App from './App'
-import './index.css'
-import reportWebVitals from './reportWebVitals'
-
 import CartContextProvider from './contexts/cart.context'
 import CategoryContextProvider from './contexts/category.context'
 import UserContextProvider from './contexts/user.context'
+import './index.css'
+import reportWebVitals from './reportWebVitals'
 
 ReactDOM.render(
   <React.StrictMode>
