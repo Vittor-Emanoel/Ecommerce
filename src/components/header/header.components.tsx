@@ -36,7 +36,7 @@ const Header = () => {
   return (
       <HeaderContainer>
           <HeaderTitle onClick={handleLogoClick}>
-            CLUB CLOTHING
+            CLUB STORE
           </HeaderTitle>
           <HeaderItems>
             <HeaderItem onClick={handleExploreClick}>
