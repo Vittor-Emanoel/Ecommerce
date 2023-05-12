@@ -4,12 +4,10 @@ import { FunctionComponent, useContext, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 // Pages
-import CategoryDetailsPage from './pages/category-details/category-details.page'
 import CheckoutPage from './pages/checkout/checkout.page'
 import ExplorePage from './pages/explore/explore.page'
 import HomePage from './pages/home/home.page'
 import LoginPage from './pages/login/login.page'
-import PaymentConfimationPage from './pages/payment-confirmation/payment.confirmation.page'
 import SignUpPage from './pages/sign-up/sign-up.page'
 
 // Components
@@ -17,18 +15,20 @@ import CartComponent from './components/cart/cart.component'
 import Loading from './components/loading/loading.component'
 import AuthenticationGuard from './guards/authentication.guard'
 
-// Ultilities
+// Utilities
 
 import { auth, db } from './config/firebase.config'
 import { UserContext } from './contexts/user.context'
 import { userConverter } from './converters/firestore.converter'
+import CategoryDetailsPage from './pages/category-details/category-details.page'
+import PaymentConfirmationPage from './pages/payment-confirmation/payment.confirmation.page'
+import ProductDetailsPage from './pages/product-details/product-details.page'
 
 const App: FunctionComponent = () => {
   const [isInitialized, setIsInitialized] = useState(true)
 
   const { isAuthenticated, loginUser, logoutUser } = useContext(UserContext)
 
-  console.log({ isAuthenticated })
   // monitora se o usuario está logado ou não
   onAuthStateChanged(auth, async (user) => {
     // se o usuario estiver logado no contexto, e o usuario no firebase(sign out)
@@ -67,6 +67,7 @@ const App: FunctionComponent = () => {
         <Route path='/' element={<HomePage />}/>
         <Route path='/explore' element={<ExplorePage />}/>
         <Route path='/category/:id' element={<CategoryDetailsPage />}/>
+        <Route path='/product-details/:id' element={<ProductDetailsPage />}/>
         <Route
         path='/checkout'
         element={
@@ -75,7 +76,7 @@ const App: FunctionComponent = () => {
           </AuthenticationGuard>
           }
           />
-          <Route path='/payment-confirmation' element={<PaymentConfimationPage />}/>
+          <Route path='/payment-confirmation' element={<PaymentConfirmationPage />}/>
         <Route path='/login' element={<LoginPage />}/>
         <Route path='/sign-up' element={<SignUpPage />}/>
       </Routes>

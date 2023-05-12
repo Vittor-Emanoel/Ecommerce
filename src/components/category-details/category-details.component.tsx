@@ -25,6 +25,8 @@ const CategoryDetails: FunctionComponent<CategoryDetailsProps> = ({ categoryId }
 
   const navigate = useNavigate()
 
+  const id = '6228f5beb7e6cb904bbe0119'
+
   useEffect(() => {
     const fetchCategory = async () => {
       try {
@@ -37,6 +39,9 @@ const CategoryDetails: FunctionComponent<CategoryDetailsProps> = ({ categoryId }
         )
         const category = querySnapshot.docs[0]?.data()
         setCategory(category)
+        console.log(category.products.find(product => {
+          return product.id === id
+        }))
       } catch (error) {
         console.log(error)
       } finally {
@@ -62,8 +67,9 @@ const CategoryDetails: FunctionComponent<CategoryDetailsProps> = ({ categoryId }
 
       <ProductsContainer>
         {category?.products.map((product) => (
-          <ProductItem key={product.id} product={product}/>
+          <ProductItem key={product.id} product={product} />
         ))}
+
       </ProductsContainer>
     </Container>
 

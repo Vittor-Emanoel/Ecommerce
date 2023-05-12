@@ -13,7 +13,7 @@ import { CartContext } from '../../contexts/cart.context'
 import Colors from '../../theme/theme.color'
 import { PaymentConfirmationContainer, PaymentConfirmationContent } from './payment-confirmation.styles'
 
-const PaymentConfimationPage: FunctionComponent = () => {
+const PaymentConfirmationPage: FunctionComponent = () => {
   const { clearProducts } = useContext(CartContext)
   const navigate = useNavigate()
 
@@ -69,4 +69,4 @@ const PaymentConfimationPage: FunctionComponent = () => {
   )
 }
 
-export default PaymentConfimationPage
+export default PaymentConfirmationPage

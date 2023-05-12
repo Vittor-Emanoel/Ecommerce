@@ -86,17 +86,22 @@ const LoginPage = () => {
 
       const querySnapshot = await getDocs(query(collection(db, 'user'), where('id', '==', userCredentials.user.uid)))
 
-      const user = querySnapshot.docs[0]?.data()
+      const userExists = querySnapshot.docs[0]?.data()
 
-      if (!user) {
+      console.log(userCredentials.user.photoURL)
+
+      if (!userExists) {
         const firstName = userCredentials.user.displayName?.split(' ')[0]
         const lastName = userCredentials.user.displayName?.split(' ')[1]
+        const imageUser = userCredentials.user.photoURL
+
         await addDoc(collection(db, 'users'), {
           id: userCredentials.user.uid,
           email: userCredentials.user.email,
           firstName,
           lastName,
-          provider: 'google.com'
+          provider: 'google.com',
+          imageUser
 
         })
       }

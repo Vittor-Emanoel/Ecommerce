@@ -14,7 +14,7 @@ import { HeaderContainer, HeaderItem, HeaderItems, HeaderTitle } from './header.
 const Header = () => {
   const navigate = useNavigate()
 
-  const { isAuthenticated } = useContext(UserContext)
+  const { isAuthenticated, currentUser, loginUser } = useContext(UserContext)
   const { productsCount, toggleCart } = useContext(CartContext)
 
   const handleLoginClick = () => {
@@ -54,6 +54,7 @@ const Header = () => {
            </>
           )}
 
+          {console.log(loginUser)}
           { isAuthenticated && (
 
           <HeaderItem onClick={() => signOut(auth)}>
@@ -62,6 +63,7 @@ const Header = () => {
 
           )}
 
+            {console.log({ currentUser })}
           <HeaderItem >
             <BsCart3 size={25} onClick={toggleCart}/>
             <p style={{ marginLeft: 5 }}>{productsCount}</p>
