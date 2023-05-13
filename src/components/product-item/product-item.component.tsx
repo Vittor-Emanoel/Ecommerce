@@ -20,13 +20,8 @@ interface ProductItemProps {
 }
 
 const ProductItem: FunctionComponent<ProductItemProps> = ({ product }) => {
-  // const { addProductToCart } = useContext(CartContext)
   const Navigate = useNavigate()
   const params = useParams()
-
-  // const handleAddToCartClick = () => {
-  //   addProductToCart(product)
-  // }
 
   const handleProductDetails = () => {
     Navigate(`/${params.id}/${product.id}`)
@@ -36,7 +31,7 @@ const ProductItem: FunctionComponent<ProductItemProps> = ({ product }) => {
     <ProductContainer>
       <ProductImage imageUrl={product.imageUrl}>
         <CustomButton startIcon={<BsPlusCircle />} onClick={handleProductDetails}>Ver mais</CustomButton>
-        {/* <CustomButton startIcon={<BsCartPlus />} onClick={handleAddToCartClick}>Adicionar ao carrinho</CustomButton> */}
+
       </ProductImage>
 
     <ProductInfo>

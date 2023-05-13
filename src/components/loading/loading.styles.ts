@@ -1,27 +1,53 @@
 import styled from 'styled-components'
-import Colors from '../../theme/theme.color'
 
 export const LoadingContainer = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 100;
+  .spinner {
+    position: relative;
+    width: 15.7px;
+    height: 15.7px;
+  }
 
-  p {
-    color: ${Colors.text.white};
-    font-weight: 500;
-    margin-bottom: 25px;
-    font-size: 1.325rem;
-    max-width: 50%;
-    text-align: center;
+  .spinner div {
+    width: 100%;
+    height: 100%;
+    background-color: #474bff;
+    border-radius: 50%;
+    animation: spinner-4t3wzl 1.25s infinite backwards;
+  }
+
+  .spinner div:nth-child(1) {
+    animation-delay: 0.15s;
+    background-color: rgba(71, 75, 255, 0.9);
+  }
+
+  .spinner div:nth-child(2) {
+    animation-delay: 0.3s;
+    background-color: rgba(71, 75, 255, 0.8);
+  }
+
+  .spinner div:nth-child(3) {
+    animation-delay: 0.45s;
+    background-color: rgba(71, 75, 255, 0.7);
+  }
+
+  .spinner div:nth-child(4) {
+    animation-delay: 0.6s;
+    background-color: rgba(71, 75, 255, 0.6);
+  }
+
+  .spinner div:nth-child(5) {
+    animation-delay: 0.75s;
+    background-color: rgba(71, 75, 255, 0.5);
+  }
+
+  @keyframes spinner-4t3wzl {
+    0% {
+      transform: rotate(0deg) translateY(-200%);
+    }
+
+    60%,
+    100% {
+      transform: rotate(360deg) translateY(-200%);
+    }
   }
 `
