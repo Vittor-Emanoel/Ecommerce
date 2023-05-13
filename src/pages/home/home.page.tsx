@@ -8,7 +8,6 @@ const HomePage = () => {
     <>
       <Header />
       <Categories />
-
     </>
   )
 }
