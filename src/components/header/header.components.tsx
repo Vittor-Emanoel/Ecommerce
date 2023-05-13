@@ -29,9 +29,9 @@ const Header = () => {
     navigate('/')
   }
 
-  const handleExploreClick = () => {
-    navigate('/explore')
-  }
+  // const handleExploreClick = () => {
+  //   navigate('/explore')
+  // }
 
   return (
       <HeaderContainer>
@@ -39,9 +39,9 @@ const Header = () => {
             CLUB STORE
           </HeaderTitle>
           <HeaderItems>
-            <HeaderItem onClick={handleExploreClick}>
+            {/* <HeaderItem onClick={handleExploreClick}>
             Explorar
-            </HeaderItem>
+            </HeaderItem> */}
 
           {!isAuthenticated && (
             <>

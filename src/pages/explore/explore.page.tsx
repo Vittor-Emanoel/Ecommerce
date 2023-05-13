@@ -4,10 +4,6 @@ import { FunctionComponent } from 'react'
 import CategoriesOverview from '../../components/categories-overview/categories-overview'
 import Header from '../../components/header/header.components'
 
-// interface Props {
-
-// }
-
 const ExplorePage: FunctionComponent = () => {
   return (
     <>
