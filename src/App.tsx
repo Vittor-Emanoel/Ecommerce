@@ -67,7 +67,7 @@ const App: FunctionComponent = () => {
         <Route path='/' element={<HomePage />}/>
         <Route path='/explore' element={<ExplorePage />}/>
         <Route path='/category/:id' element={<CategoryDetailsPage />}/>
-        <Route path='/product-details/:id' element={<ProductDetailsPage />}/>
+        <Route path='/:category/:id' element={<ProductDetailsPage />}/>
         <Route
         path='/checkout'
         element={

@@ -8,7 +8,7 @@ import Product from '../../types/product.types'
 import CustomButton from '../custom-button/custom-button.component'
 
 // Styles
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import {
   ProductContainer,
   ProductImage,
@@ -22,15 +22,14 @@ interface ProductItemProps {
 const ProductItem: FunctionComponent<ProductItemProps> = ({ product }) => {
   // const { addProductToCart } = useContext(CartContext)
   const Navigate = useNavigate()
+  const params = useParams()
 
   // const handleAddToCartClick = () => {
   //   addProductToCart(product)
   // }
 
-  console.log(product)
-
   const handleProductDetails = () => {
-    Navigate(`/product-details/${product.id}`)
+    Navigate(`/${params.id}/${product.id}`)
   }
 
   return (
