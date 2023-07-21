@@ -22,7 +22,6 @@ import { UserContext } from './contexts/user.context'
 import { userConverter } from './converters/firestore.converter'
 import CategoryDetailsPage from './pages/category-details/category-details.page'
 import PaymentConfirmationPage from './pages/payment-confirmation/payment.confirmation.page'
-import ProductDetailsPage from './pages/product-details/product-details.page'
 
 const App: FunctionComponent = () => {
   const [isInitialized, setIsInitialized] = useState(true)
@@ -67,7 +66,6 @@ const App: FunctionComponent = () => {
         <Route path='/' element={<HomePage />}/>
         <Route path='/explore' element={<ExplorePage />}/>
         <Route path='/category/:id' element={<CategoryDetailsPage />}/>
-        <Route path='/:category/:id' element={<ProductDetailsPage />}/>
         <Route
         path='/checkout'
         element={
