@@ -2,6 +2,7 @@ import React from 'react'
 
 import ReactDOM from 'react-dom'
 import { ThemeProvider } from 'styled-components'
+import { Provider } from 'react-redux'
 import App from './App'
 import CartContextProvider from './contexts/cart.context'
 import CategoryContextProvider from './contexts/category.context'
@@ -10,18 +11,21 @@ import './index.css'
 import reportWebVitals from './reportWebVitals'
 
 import theme from './theme/theme.color'
+import store from './store/store'
 
 ReactDOM.render(
   <React.StrictMode>
-    <UserContextProvider>
-      <CategoryContextProvider>
-        <CartContextProvider>
-          <ThemeProvider theme={theme}>
-           <App />
-           </ThemeProvider>
-      </CartContextProvider>
-      </CategoryContextProvider>
-    </UserContextProvider>
+    <Provider store={store}>
+      <UserContextProvider>
+        <CategoryContextProvider>
+          <CartContextProvider>
+            <ThemeProvider theme={theme}>
+              <App />
+            </ThemeProvider>
+          </CartContextProvider>
+        </CategoryContextProvider>
+      </UserContextProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 )
