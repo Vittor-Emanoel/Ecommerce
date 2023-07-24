@@ -5,7 +5,6 @@ import {
 } from 'firebase/auth'
 import { addDoc, collection } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { FiLogIn } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
@@ -27,6 +26,7 @@ import {
   SignUpHeadline,
   SignUpInputContainer
 } from './sign-up.styles'
+import { useAppSelector } from '../../hooks/redux.hooks'
 
 interface SignUpForm {
   firstName: string
@@ -49,8 +49,8 @@ const SignUpPage = () => {
 
   const watchPassword = watch('password')
 
-  const { isAuthenticated } = useSelector(
-    (rootReducer: any) => rootReducer.userReducer
+  const { isAuthenticated } = useAppSelector(
+    (rootReducer) => rootReducer.userReducer
   )
 
   const navigate = useNavigate()

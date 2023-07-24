@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 // utilitis
-import { logout } from '../../store/reducers/user/user.actions'
+import { logoutUser } from '../../store/reducers/user/user.actions'
 import { CartContext } from '../../contexts/cart.context'
 
 // Styles
@@ -45,7 +45,7 @@ const Header = () => {
   }
 
   const handleSignOutClick = () => {
-    dispatch(logout())
+    dispatch(logoutUser())
     signOut(auth)
   }
 

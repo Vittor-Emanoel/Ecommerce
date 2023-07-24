@@ -10,7 +10,6 @@ import { useForm } from 'react-hook-form'
 import { BsGoogle } from 'react-icons/bs'
 import { FiLogIn } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 
 // Components
 import CustomButton from '../../components/custom-button/custom-button.component'
@@ -34,6 +33,7 @@ import {
   LoginInputContainer,
   LoginSubtitle
 } from './login.styles'
+import { useAppSelector } from '../../hooks/redux.hooks'
 
 interface LoginForm {
   email: string
@@ -50,8 +50,8 @@ const LoginPage = () => {
 
   const [isLoading, setIsLoading] = useState(false)
 
-  const { isAuthenticated } = useSelector(
-    (rootReducer: any) => rootReducer.userReducer
+  const { isAuthenticated } = useAppSelector(
+    (rootReducer) => rootReducer.userReducer
   )
 
   const navigate = useNavigate()

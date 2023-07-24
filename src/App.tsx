@@ -2,7 +2,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { FunctionComponent, useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 // Pages
 import CheckoutPage from './pages/checkout/checkout.page'
@@ -22,14 +22,15 @@ import { auth, db } from './config/firebase.config'
 import { userConverter } from './converters/firestore.converter'
 import CategoryDetailsPage from './pages/category-details/category-details.page'
 import PaymentConfirmationPage from './pages/payment-confirmation/payment.confirmation.page'
-import { loginUser, logout } from './store/reducers/user/user.actions'
+import { loginUser, logoutUser } from './store/reducers/user/user.actions'
+import { useAppSelector } from './hooks/redux.hooks'
 
 const App: FunctionComponent = () => {
   const [isInitialized, setIsInitialized] = useState(true)
 
   const dispatch = useDispatch()
 
-  const { isAuthenticated } = useSelector(
+  const { isAuthenticated } = useAppSelector(
     (rootReducer: any) => rootReducer.userReducer
   )
 
@@ -38,7 +39,7 @@ const App: FunctionComponent = () => {
       const isSignIngOut = isAuthenticated && !user
 
       if (isSignIngOut) {
-        dispatch(logout())
+        dispatch(logoutUser())
 
         return setIsInitialized(false)
       }
