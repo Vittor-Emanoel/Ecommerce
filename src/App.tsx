@@ -22,6 +22,7 @@ import { auth, db } from './config/firebase.config'
 import { userConverter } from './converters/firestore.converter'
 import CategoryDetailsPage from './pages/category-details/category-details.page'
 import PaymentConfirmationPage from './pages/payment-confirmation/payment.confirmation.page'
+import { loginUser, logout } from './store/reducers/user/user.actions'
 
 const App: FunctionComponent = () => {
   const [isInitialized, setIsInitialized] = useState(true)
@@ -37,7 +38,7 @@ const App: FunctionComponent = () => {
       const isSignIngOut = isAuthenticated && !user
 
       if (isSignIngOut) {
-        dispatch({ type: 'LOGOUT_USER' })
+        dispatch(logout())
 
         return setIsInitialized(false)
       }
@@ -52,7 +53,7 @@ const App: FunctionComponent = () => {
         )
         const userFromFirestore = querySnapshot.docs[0]?.data()
 
-        dispatch({ type: 'LOGIN_USER', payload: userFromFirestore })
+        dispatch(loginUser(userFromFirestore))
 
         return setIsInitialized(false)
       }

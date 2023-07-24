@@ -103,15 +103,13 @@ const LoginPage = () => {
       if (!userExists) {
         const firstName = userCredentials.user.displayName?.split(' ')[0]
         const lastName = userCredentials.user.displayName?.split(' ')[1]
-        const imageUser = userCredentials.user.photoURL
 
         await addDoc(collection(db, 'users'), {
           id: userCredentials.user.uid,
           email: userCredentials.user.email,
           firstName,
           lastName,
-          provider: 'google.com',
-          imageUser
+          provider: 'google.com'
         })
       }
     } catch (error) {
