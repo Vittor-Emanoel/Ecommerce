@@ -1,11 +1,17 @@
-import { AuthError, AuthErrorCodes, createUserWithEmailAndPassword } from 'firebase/auth'
+import {
+  AuthError,
+  AuthErrorCodes,
+  createUserWithEmailAndPassword
+} from 'firebase/auth'
 import { addDoc, collection } from 'firebase/firestore'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { FiLogIn } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 import validator from 'validator'
 import { auth, db } from '../../config/firebase.config'
+
 // Components
 import CustomButton from '../../components/custom-button/custom-button.component'
 import CustomInput from '../../components/custom-input/custom-input.component'
@@ -14,7 +20,7 @@ import ErrorMessage from '../../components/input-error/error-message.component'
 import Loading from '../../components/loading/loading.component'
 
 // Styles
-import { UserContext } from '../../contexts/user.context'
+
 import {
   SignUpContainer,
   SignUpContent,
@@ -41,10 +47,12 @@ const SignUpPage = () => {
 
   const [isLoading, setIsLoading] = useState(false)
 
-  // assistindo a um valor
   const watchPassword = watch('password')
 
-  const { isAuthenticated } = useContext(UserContext)
+  const { isAuthenticated } = useSelector(
+    (rootReducer: any) => rootReducer.userReducer
+  )
+
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -55,7 +63,11 @@ const SignUpPage = () => {
   const handleSubmitPress = async (data: SignUpForm) => {
     try {
       setIsLoading(true)
-      const userCredentials = await createUserWithEmailAndPassword(auth, data.email, data.password)
+      const userCredentials = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      )
 
       await addDoc(collection(db, 'users'), {
         id: userCredentials.user.uid,
@@ -63,7 +75,6 @@ const SignUpPage = () => {
         lastName: data.lastName,
         email: userCredentials.user.email,
         provider: 'firebase'
-
       })
     } catch (error) {
       const _error = error as AuthError
@@ -82,7 +93,7 @@ const SignUpPage = () => {
     <div>
       <Header />
 
-    {isLoading && <Loading />}
+      {isLoading && <Loading />}
       <SignUpContainer>
         <SignUpContent>
           <SignUpHeadline>Crie sua conta</SignUpHeadline>
@@ -131,14 +142,11 @@ const SignUpPage = () => {
             )}
 
             {errors?.email?.type === 'validate' && (
-              <ErrorMessage>
-                Por favor, insira um e-mail válido.
-              </ErrorMessage>
+              <ErrorMessage>Por favor, insira um e-mail válido.</ErrorMessage>
             )}
-              {errors?.email?.type === 'alreadyInUse' && (
+            {errors?.email?.type === 'alreadyInUse' && (
               <ErrorMessage>Está e-mail já está sendo ultilizado</ErrorMessage>
-              )}
-
+            )}
           </SignUpInputContainer>
 
           <SignUpInputContainer>
@@ -154,10 +162,11 @@ const SignUpPage = () => {
               <ErrorMessage>A senha é obrigatória.</ErrorMessage>
             )}
 
-             {errors?.password?.type === 'minLength' && (
-              <ErrorMessage>A senha precisa ter no minimo 6 caracteres</ErrorMessage>
-             )}
-
+            {errors?.password?.type === 'minLength' && (
+              <ErrorMessage>
+                A senha precisa ter no minimo 6 caracteres
+              </ErrorMessage>
+            )}
           </SignUpInputContainer>
 
           <SignUpInputContainer>
@@ -177,9 +186,7 @@ const SignUpPage = () => {
             />
 
             {errors?.passwordConfirmation?.type === 'required' && (
-              <ErrorMessage>
-                A confirmação de senha é obrigatória.
-              </ErrorMessage>
+              <ErrorMessage>A confirmação de senha é obrigatória.</ErrorMessage>
             )}
 
             {errors?.passwordConfirmation?.type === 'validate' && (
@@ -187,10 +194,11 @@ const SignUpPage = () => {
                 A confirmação de senha precisa ser igual a senha.
               </ErrorMessage>
             )}
-              {errors?.password?.type === 'minLength' && (
-              <ErrorMessage>A senha precisa ter no minimo 6 caracteres</ErrorMessage>
-              )}
-
+            {errors?.password?.type === 'minLength' && (
+              <ErrorMessage>
+                A senha precisa ter no minimo 6 caracteres
+              </ErrorMessage>
+            )}
           </SignUpInputContainer>
 
           <CustomButton

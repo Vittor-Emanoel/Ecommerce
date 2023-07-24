@@ -1,20 +1,31 @@
-import { signOut } from 'firebase/auth'
 import { useContext } from 'react'
 import { BsCart3 } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
-// ultilitis
-import { auth } from '../../config/firebase.config'
+// utilitis
+
 import { CartContext } from '../../contexts/cart.context'
-import { UserContext } from '../../contexts/user.context'
 
 // Styles
-import { HeaderContainer, HeaderItem, HeaderItems, HeaderTitle } from './header.styles'
+import {
+  HeaderContainer,
+  HeaderItem,
+  HeaderItems,
+  HeaderTitle
+} from './header.styles'
+import { signOut } from 'firebase/auth'
+import { auth } from '../../config/firebase.config'
 
 const Header = () => {
   const navigate = useNavigate()
 
-  const { isAuthenticated, currentUser, loginUser } = useContext(UserContext)
+  const dispatch = useDispatch()
+
+  const { isAuthenticated } = useSelector(
+    (rootReducer: any) => rootReducer.userReducer
+  )
+
   const { productsCount, toggleCart } = useContext(CartContext)
 
   const handleLoginClick = () => {
@@ -29,47 +40,38 @@ const Header = () => {
     navigate('/')
   }
 
-  // const handleExploreClick = () => {
-  //   navigate('/explore')
-  // }
+  const handleExploreClick = () => {
+    navigate('/explore')
+  }
+
+  const handleSignOutClick = () => {
+    dispatch({ type: 'LOGOUT_USER' })
+    signOut(auth)
+  }
 
   return (
-      <HeaderContainer>
-          <HeaderTitle onClick={handleLogoClick}>
-            CLUB STORE
-          </HeaderTitle>
-          <HeaderItems>
-            {/* <HeaderItem onClick={handleExploreClick}>
-            Explorar
-            </HeaderItem> */}
+    <HeaderContainer>
+      <HeaderTitle onClick={handleLogoClick}>CLUB STORE</HeaderTitle>
+      <HeaderItems>
+        <HeaderItem onClick={handleExploreClick}>Explorar</HeaderItem>
 
-          {!isAuthenticated && (
-            <>
-             <HeaderItem onClick={handleLoginClick}>
-             Login
-           </HeaderItem >
-           <HeaderItem onClick={handleSignUpClick}>
-            Criar conta
-          </HeaderItem>
-           </>
-          )}
+        {!isAuthenticated && (
+          <>
+            <HeaderItem onClick={handleLoginClick}>Login</HeaderItem>
+            <HeaderItem onClick={handleSignUpClick}>Criar conta</HeaderItem>
+          </>
+        )}
 
-          {console.log(loginUser)}
-          { isAuthenticated && (
+        {isAuthenticated && (
+          <HeaderItem onClick={handleSignOutClick}>Sair</HeaderItem>
+        )}
 
-          <HeaderItem onClick={() => signOut(auth)}>
-                Sair
-          </HeaderItem>
-
-          )}
-
-            {console.log({ currentUser })}
-          <HeaderItem >
-            <BsCart3 size={25} onClick={toggleCart}/>
-            <p style={{ marginLeft: 5 }}>{productsCount}</p>
-          </HeaderItem>
-          </HeaderItems>
-      </HeaderContainer>
+        <HeaderItem>
+          <BsCart3 size={25} onClick={toggleCart} />
+          <p style={{ marginLeft: 5 }}>{productsCount}</p>
+        </HeaderItem>
+      </HeaderItems>
+    </HeaderContainer>
   )
 }
 

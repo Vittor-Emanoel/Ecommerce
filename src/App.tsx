@@ -1,7 +1,8 @@
 import { onAuthStateChanged } from 'firebase/auth'
 import { collection, getDocs, query, where } from 'firebase/firestore'
-import { FunctionComponent, useContext, useState } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 // Pages
 import CheckoutPage from './pages/checkout/checkout.page'
@@ -18,7 +19,6 @@ import AuthenticationGuard from './guards/authentication.guard'
 // Utilities
 
 import { auth, db } from './config/firebase.config'
-import { UserContext } from './contexts/user.context'
 import { userConverter } from './converters/firestore.converter'
 import CategoryDetailsPage from './pages/category-details/category-details.page'
 import PaymentConfirmationPage from './pages/payment-confirmation/payment.confirmation.page'
@@ -26,57 +26,61 @@ import PaymentConfirmationPage from './pages/payment-confirmation/payment.confir
 const App: FunctionComponent = () => {
   const [isInitialized, setIsInitialized] = useState(true)
 
-  const { isAuthenticated, loginUser, logoutUser } = useContext(UserContext)
+  const dispatch = useDispatch()
 
-  // monitora se o usuario está logado ou não
-  onAuthStateChanged(auth, async (user) => {
-    // se o usuario estiver logado no contexto, e o usuario no firebase(sign out)
-    // devemos limpar o context (sign out)
+  const { isAuthenticated } = useSelector(
+    (rootReducer: any) => rootReducer.userReducer
+  )
 
-    const isSignIngOut = isAuthenticated && !user
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      const isSignIngOut = isAuthenticated && !user
 
-    if (isSignIngOut) {
-      logoutUser()
+      if (isSignIngOut) {
+        dispatch({ type: 'LOGOUT_USER' })
 
+        return setIsInitialized(false)
+      }
+
+      const isSignIngIn = !isAuthenticated && user
+      if (isSignIngIn) {
+        const querySnapshot = await getDocs(
+          query(
+            collection(db, 'users').withConverter(userConverter),
+            where('id', '==', user.uid)
+          )
+        )
+        const userFromFirestore = querySnapshot.docs[0]?.data()
+
+        dispatch({ type: 'LOGIN_USER', payload: userFromFirestore })
+
+        return setIsInitialized(false)
+      }
       return setIsInitialized(false)
-    }
+    })
+  }, [dispatch])
 
-    // o usuario for nulo no contexto, e não for nulo no firebase
-    // devemos fazeer o login
-
-    const isSignIngIn = !isAuthenticated && user
-    if (isSignIngIn) {
-      const querySnapshot = await getDocs(
-        query(collection(db, 'users').withConverter(userConverter), where('id', '==', user.uid))
-      )
-      const userFromFirestore = querySnapshot.docs[0]?.data()
-
-      loginUser(userFromFirestore)
-
-      return setIsInitialized(false)
-    }
-    return setIsInitialized(false)
-  })
-
-  // aplicação só vai ser exibida quando terminar o processamento
   if (isInitialized) return <Loading />
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<HomePage />}/>
-        <Route path='/explore' element={<ExplorePage />}/>
-        <Route path='/category/:id' element={<CategoryDetailsPage />}/>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/explore" element={<ExplorePage />} />
+        <Route path="/category/:id" element={<CategoryDetailsPage />} />
         <Route
-        path='/checkout'
-        element={
-        <AuthenticationGuard>
-          <CheckoutPage />
-          </AuthenticationGuard>
+          path="/checkout"
+          element={
+            <AuthenticationGuard>
+              <CheckoutPage />
+            </AuthenticationGuard>
           }
-          />
-          <Route path='/payment-confirmation' element={<PaymentConfirmationPage />}/>
-        <Route path='/login' element={<LoginPage />}/>
-        <Route path='/sign-up' element={<SignUpPage />}/>
+        />
+        <Route
+          path="/payment-confirmation"
+          element={<PaymentConfirmationPage />}
+        />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
       </Routes>
 
       <CartComponent />
