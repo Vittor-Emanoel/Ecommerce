@@ -17,9 +17,11 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.39.5",
     "react-icons": "^4.6.0",
+    "react-redux": "^8.1.1",
     "react-router-dom": "^6.11.1",
     "react-scripts": "5.0.1",
     "react-spinners": "^0.13.7",
+    "redux": "^4.2.1",
     "styled-components": "^5.3.6",
     "typescript": "*",
     "validator": "^13.7.0",
@@ -51,6 +53,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-redux": "^7.1.25",
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.15.0",
     "@typescript-eslint/parser": "^5.15.0",
