@@ -1,4 +1,10 @@
-import { createContext, FunctionComponent, useEffect, useMemo, useState } from 'react'
+import {
+  createContext,
+  FunctionComponent,
+  useEffect,
+  useMemo,
+  useState
+} from 'react'
 import CartProduct from '../types/cart.types'
 import Product from '../types/product.types'
 
@@ -35,7 +41,9 @@ const CartContextProvider: FunctionComponent = ({ children }) => {
   // exibindo a quantidade de produtos sempre que o página for recarregada
 
   useEffect(() => {
-    const productsFromLocalStorage = JSON.parse(localStorage.getItem('cartProducts')!)
+    const productsFromLocalStorage = JSON.parse(
+      localStorage.getItem('cartProducts')!
+    )
     setProducts(productsFromLocalStorage)
   }, [])
 
@@ -53,7 +61,6 @@ const CartContextProvider: FunctionComponent = ({ children }) => {
     }, 0)
   }, [products])
 
-  // Quantidade de produtos no carrinho
   const productsCount = useMemo(() => {
     return products.reduce((acc, currentProduct) => {
       return acc + currentProduct.quantity
@@ -61,38 +68,53 @@ const CartContextProvider: FunctionComponent = ({ children }) => {
   }, [products])
 
   const toggleCart = () => {
-    // se carrinho estiver visivel, esconde ele, se não estiver visivel deixa ele visivel!!
     setIsVisible((prevState) => !prevState)
   }
 
   const addProductToCart = (product: Product) => {
-    // vericar se o produto já está no carrinho
-    const productIsAlreadyInCart = products.some(item => item.id === product.id)
+    const productIsAlreadyInCart = products.some(
+      (item) => item.id === product.id
+    )
 
-    // se sim => aumentar sua quantidade
     if (productIsAlreadyInCart) {
-      return setProducts((products) => products.map(item => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item))
+      return setProducts((products) =>
+        products.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
+      )
     }
 
-    // se não => adicionar ao carrinho
-
-    setProducts(prevState => [...prevState, { ...product, quantity: 1 }])
+    setProducts((prevState) => [...prevState, { ...product, quantity: 1 }])
   }
 
-  // Remover do carrinho
   const removeProductFromCart = (productId: String) => {
-    setProducts(products => products.filter(product => product.id !== productId))
+    setProducts((products) =>
+      products.filter((product) => product.id !== productId)
+    )
   }
 
-  // Aumentar a quantidade
   const increaseProductQuantity = (productId: String) => {
-    setProducts(products => products.map(product => product.id === productId ? { ...product, quantity: product.quantity + 1 } : product))
+    setProducts((products) =>
+      products.map((product) =>
+        product.id === productId
+          ? { ...product, quantity: product.quantity + 1 }
+          : product
+      )
+    )
   }
 
   // Diminuindo a quantidade
   const decreaseProductQuantity = (productId: String) => {
-    setProducts(products => products.map(product => product.id === productId ? { ...product, quantity: product.quantity - 1 } : product
-    ).filter(product => product.quantity > 0)
+    setProducts((products) =>
+      products
+        .map((product) =>
+          product.id === productId
+            ? { ...product, quantity: product.quantity - 1 }
+            : product
+        )
+        .filter((product) => product.quantity > 0)
     )
   }
 
@@ -101,8 +123,20 @@ const CartContextProvider: FunctionComponent = ({ children }) => {
   }
 
   return (
-    <CartContext.Provider value={{ isVisible, products, productsCount, productsTotalPrice, toggleCart, addProductToCart, removeProductFromCart, increaseProductQuantity, decreaseProductQuantity, clearProducts }}>
-        {children}
+    <CartContext.Provider
+      value={{
+        isVisible,
+        products,
+        productsCount,
+        productsTotalPrice,
+        toggleCart,
+        addProductToCart,
+        removeProductFromCart,
+        increaseProductQuantity,
+        decreaseProductQuantity,
+        clearProducts
+      }}>
+      {children}
     </CartContext.Provider>
   )
 }

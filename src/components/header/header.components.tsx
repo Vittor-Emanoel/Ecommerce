@@ -16,6 +16,7 @@ import {
 } from './header.styles'
 import { signOut } from 'firebase/auth'
 import { auth } from '../../config/firebase.config'
+import { toggleCart } from '../../store/reducers/cart/cart.actions'
 
 const Header = () => {
   const navigate = useNavigate()
@@ -26,7 +27,7 @@ const Header = () => {
     (rootReducer: any) => rootReducer.userReducer
   )
 
-  const { productsCount, toggleCart } = useContext(CartContext)
+  const { productsCount } = useContext(CartContext)
 
   const handleLoginClick = () => {
     navigate('/login')
@@ -49,6 +50,10 @@ const Header = () => {
     signOut(auth)
   }
 
+  const handleCartClick = () => {
+    dispatch(toggleCart())
+  }
+
   return (
     <HeaderContainer>
       <HeaderTitle onClick={handleLogoClick}>CLUB STORE</HeaderTitle>
@@ -67,7 +72,7 @@ const Header = () => {
         )}
 
         <HeaderItem>
-          <BsCart3 size={25} onClick={toggleCart} />
+          <BsCart3 size={25} onClick={handleCartClick} />
           <p style={{ marginLeft: 5 }}>{productsCount}</p>
         </HeaderItem>
       </HeaderItems>

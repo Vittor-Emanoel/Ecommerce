@@ -1,11 +1,8 @@
-import { FunctionComponent, useContext } from 'react'
-
-// Ultilities
+import { FunctionComponent } from 'react'
 import { BsCartPlus } from 'react-icons/bs'
-import { CartContext } from '../../contexts/cart.context'
+import { useDispatch } from 'react-redux'
 
 // Components
-import Product from '../../types/product.types'
 import CustomButton from '../custom-button/custom-button.component'
 
 // Styles
@@ -15,29 +12,34 @@ import {
   ProductInfo
 } from './product-item.styles'
 
+// Utilities
+import Product from '../../types/product.types'
+import { addProductToCart } from '../../store/reducers/cart/cart.actions'
+
 interface ProductItemProps {
   product: Product
 }
 
 const ProductItem: FunctionComponent<ProductItemProps> = ({ product }) => {
-  const { addProductToCart } = useContext(CartContext)
+  const dispatch = useDispatch()
 
   const handleAddToCartClick = () => {
-    addProductToCart(product)
+    dispatch(addProductToCart(product))
   }
 
   return (
     <ProductContainer>
       <ProductImage imageUrl={product.imageUrl}>
-        <CustomButton startIcon={<BsCartPlus />} onClick={handleAddToCartClick}>Adicionar ao carrinho</CustomButton>
+        <CustomButton startIcon={<BsCartPlus />} onClick={handleAddToCartClick}>
+          Adicionar ao carrinho
+        </CustomButton>
       </ProductImage>
 
-    <ProductInfo>
-      <p>{product.name}</p>
-      <p>R${product.price}</p>
-    </ProductInfo>
+      <ProductInfo>
+        <p>{product.name}</p>
+        <p>R${product.price}</p>
+      </ProductInfo>
     </ProductContainer>
-
   )
 }
 

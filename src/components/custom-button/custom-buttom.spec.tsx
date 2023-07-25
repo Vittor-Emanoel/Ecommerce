@@ -8,9 +8,7 @@ describe('Custom-Button', () => {
 
     getByText('lorem ipsum')
   })
-})
 
-describe('Custom-Button', () => {
   it('should render container icon when startIcon prop is passed ', () => {
     const { container } = render(
       <CustomButton startIcon={<BsBagCheck />}>lorem ipsum</CustomButton>
