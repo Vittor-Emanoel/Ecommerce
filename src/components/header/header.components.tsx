@@ -1,11 +1,11 @@
-import { useContext } from 'react'
 import { BsCart3 } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 // utilitis
 import { logoutUser } from '../../store/reducers/user/user.actions'
-import { CartContext } from '../../contexts/cart.context'
+import { useAppSelector } from '../../hooks/redux.hooks'
+import { selectProductsCount } from '../../store/reducers/cart/cart.selectors'
 
 // Styles
 import {
@@ -23,11 +23,11 @@ const Header = () => {
 
   const dispatch = useDispatch()
 
-  const { isAuthenticated } = useSelector(
-    (rootReducer: any) => rootReducer.userReducer
+  const { isAuthenticated } = useAppSelector(
+    (rootReducer) => rootReducer.userReducer
   )
 
-  const { productsCount } = useContext(CartContext)
+  const productsCount = useAppSelector(selectProductsCount)
 
   const handleLoginClick = () => {
     navigate('/login')
