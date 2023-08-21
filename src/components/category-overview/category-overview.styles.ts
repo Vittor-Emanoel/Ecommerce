@@ -9,7 +9,7 @@ export const CategoryContainer = styled.div`
 
 export const CategoryTitle = styled.p`
   font-size: 21px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 5px;
 `
 

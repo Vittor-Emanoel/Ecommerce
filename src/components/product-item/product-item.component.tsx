@@ -36,7 +36,7 @@ const ProductItem: FunctionComponent<ProductItemProps> = ({ product }) => {
       </ProductImage>
 
       <ProductInfo>
-        <p>{product.name}</p>
+        <strong>{product.name}</strong>
         <p>R${product.price}</p>
       </ProductInfo>
     </ProductContainer>

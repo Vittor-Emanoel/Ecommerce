@@ -18,9 +18,9 @@ export const CategoryTitle = styled.div`
 export const ProductsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  justify-items: start;
-  margin-top: 5px;
-  grid-row-gap: 20px;
+  justify-items: center;
+  margin-top: 15px;
+  grid-row-gap: 40px;
 
   @media (max-width: 768px) {
     display: flex;

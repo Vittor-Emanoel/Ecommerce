@@ -15,8 +15,9 @@ export const ProductContainer = styled.div`
 
 export const ProductInfo = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  margin-top: 5px;
+  margin-top: 15px;
 
   p {
     font-size: 1rem;
