@@ -1,9 +1,13 @@
-import { FunctionComponent, useContext } from 'react'
+import { FunctionComponent } from 'react'
 import { AiOutlineClose, AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
-import { CartContext } from '../../contexts/cart.context'
 
-// Ultilites
+// Utilites
 import CartProduct from '../../types/cart.types'
+import {
+  decreaseCartProductQuantity,
+  increaseCartProductQuantity,
+  removeProductFromCart
+} from '../../store/reducers/cart/cart.actions'
 
 // Styles
 import {
@@ -13,42 +17,39 @@ import {
   CartItemQuantity,
   RemoveButton
 } from './cart-item.styles'
+import { useDispatch } from 'react-redux'
 
 interface CartItemProps {
-  // tem a quantity number
   product: CartProduct
 }
 
 const CartItem: FunctionComponent<CartItemProps> = ({ product }) => {
-  const { removeProductFromCart, increaseProductQuantity, decreaseProductQuantity } = useContext(CartContext)
+  const dispatch = useDispatch()
 
-  // remover o item pelo id
   const handleRemoveClick = () => {
-    removeProductFromCart(product.id)
+    dispatch(removeProductFromCart(product.id))
   }
 
-  // Aumentando a quantidade do item
   const handleIncreaseClick = () => {
-    increaseProductQuantity(product.id)
+    dispatch(increaseCartProductQuantity(product.id))
   }
 
-  // Diminuir a quantidade do item
   const handleDecreaseClick = () => {
-    decreaseProductQuantity(product.id)
+    dispatch(decreaseCartProductQuantity(product.id))
   }
 
   return (
     <CartItemContainer>
-        <CartItemImage imageUrl={product.imageUrl} />
+      <CartItemImage imageUrl={product.imageUrl} />
 
       <CartItemInfo>
         <p>{product.name}</p>
         <p>R${product.price}</p>
 
         <CartItemQuantity>
-          <AiOutlineMinus size={20} onClick={handleDecreaseClick}/>
+          <AiOutlineMinus size={20} onClick={handleDecreaseClick} />
           <p>{product.quantity}</p>
-          <AiOutlinePlus size={20} onClick={handleIncreaseClick}/>
+          <AiOutlinePlus size={20} onClick={handleIncreaseClick} />
         </CartItemQuantity>
       </CartItemInfo>
       <RemoveButton onClick={handleRemoveClick}>
