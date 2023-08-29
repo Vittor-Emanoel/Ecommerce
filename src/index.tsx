@@ -5,8 +5,6 @@ import { ThemeProvider } from 'styled-components'
 import { Provider } from 'react-redux'
 import App from './App'
 
-import CategoryContextProvider from './contexts/category.context'
-
 // @ts-ignore
 import { PersistGate } from 'redux-persist/integration/react'
 
@@ -20,11 +18,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistedStore}>
-        <CategoryContextProvider>
-          <ThemeProvider theme={theme}>
-            <App />
-          </ThemeProvider>
-        </CategoryContextProvider>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
       </PersistGate>
     </Provider>
   </React.StrictMode>,
