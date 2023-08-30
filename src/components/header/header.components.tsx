@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 // utilitis
-import { logoutUser } from '../../store/reducers/user/user.actions'
+import { logoutUser } from '../../store/toolkit/user/user.slice'
 import { useAppSelector } from '../../hooks/redux.hooks'
 import { selectProductsCount } from '../../store/reducers/cart/cart.selectors'
 

@@ -1,7 +1,7 @@
-import { createStore, applyMiddleware } from 'redux'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 import rootReducer from './root-reducer'
+import { configureStore } from '@reduxjs/toolkit'
 
 // @ts-ignore
 import storage from 'redux-persist/lib/storage'
@@ -21,10 +21,10 @@ const persistedRootReducer: typeof rootReducer = persistReducer(
   rootReducer
 )
 
-export const store = createStore(
-  persistedRootReducer,
-  applyMiddleware(thunk, logger)
-)
+export const store = configureStore({
+  reducer: persistedRootReducer,
+  middleware: [thunk, logger]
+})
 export const persistedStore = persistStore(store)
 
 export type RootState = ReturnType<typeof store.getState>
