@@ -7,7 +7,7 @@ import {
   decreaseCartProductQuantity,
   increaseCartProductQuantity,
   removeProductFromCart
-} from '../../store/reducers/cart/cart.actions'
+} from '../../store/toolkit/cart/cart.slice'
 
 // Styles
 import {

@@ -16,7 +16,7 @@ import {
 } from './header.styles'
 import { signOut } from 'firebase/auth'
 import { auth } from '../../config/firebase.config'
-import { toggleCart } from '../../store/reducers/cart/cart.actions'
+import { toggleCart } from '../../store/toolkit/cart/cart.slice'
 
 const Header = () => {
   const navigate = useNavigate()
