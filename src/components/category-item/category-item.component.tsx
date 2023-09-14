@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-// Ultilities
+// Utilities
 import Category from '../../types/category.types'
 
 // Styles
@@ -11,23 +11,21 @@ interface CategoryItemProps {
   category: Category
 }
 
-const CategoryItem:FunctionComponent<CategoryItemProps> = ({ category }) => {
+const CategoryItem: FunctionComponent<CategoryItemProps> = ({ category }) => {
   const navigate = useNavigate()
 
-  // sendo redirecionado para o id ca category em especido
+  // sendo redirecionado para o id ca category em especifico
   const handleExploreCategory = () => {
     navigate(`/category/${category.id}`)
   }
 
   return (
-      <CategoryItemContainer
-        backgroundImage={category.imageUrl}
-        >
-        <CategoryName onClick={handleExploreCategory}>
-          <p>{category.displayName}</p>
-          <p>Explorar</p>
-        </CategoryName>
-      </CategoryItemContainer>
+    <CategoryItemContainer backgroundImage={category.imageUrl}>
+      <CategoryName onClick={handleExploreCategory}>
+        <p>{category.displayName}</p>
+        <p>Explorar</p>
+      </CategoryName>
+    </CategoryItemContainer>
   )
 }
 
